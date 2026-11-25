@@ -1,0 +1,11 @@
+{
+  "name": "hojokin-hiroba",
+  "private": true,
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "fetch": "node scripts/fetch.mjs",
+    "build": "node scripts/build.mjs",
+    "update": "node scripts/fetch.mjs && node scripts/build.mjs"
+  }
+}

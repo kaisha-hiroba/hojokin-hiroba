@@ -1,0 +1,10 @@
+{
+  "_comment": "jGrantsに構造化データがない期限を、公募要領を確認して手入力する。キーは補助金ID。日付はJSTのYYYY-MM-DD。",
+  "_example": {
+    "a0W2x000005iqyXEAQ": {
+      "reportDeadline": "2027-06-30",
+      "paymentDeadline": "2027-07-31",
+      "source": "公募要領 第○章（確認日 2026-11-25）"
+    }
+  }
+}
