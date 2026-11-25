@@ -1,0 +1,79 @@
+/* 厚労省の助成金ページ(/joseikin/)専用スタイル。基本トークンは style.css を使う */
+.jh{font-size:1.05rem;margin:0 0 8px}
+.needs{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.need{background:var(--surface);border:1px solid var(--line);border-radius:var(--r2);padding:12px 14px;box-shadow:var(--shadow)}
+.need>b{display:block;font-size:.95rem;margin-bottom:6px;line-height:1.5}
+.need div{display:flex;flex-wrap:wrap;gap:6px}
+.need a{display:inline-flex;flex-direction:column;border:1px solid var(--line2);border-radius:9px;padding:4px 10px;font-size:.84rem;font-weight:700;text-decoration:none;line-height:1.4;background:var(--bg)}
+.need a small{font-weight:400;color:var(--ink3);font-size:.72rem}
+.need a:hover{border-color:var(--accent);background:var(--accent-bg)}
+.jfilter{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:0 0 12px}
+.jfilter .field{flex:1;min-width:240px;max-width:560px}
+#jcount{font-size:.88rem;color:var(--ink2)}
+.jnav{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 6px}
+.jnav a{font-size:.8rem;border:1px solid var(--line);border-radius:99px;padding:2px 12px;background:var(--surface);color:var(--ink2);text-decoration:none}
+.jnav a:hover{border-color:var(--accent);color:var(--accent-ink)}
+.jcat .h2 small{font-size:.76rem;color:var(--ink3);font-weight:600;margin-left:10px}
+.jlead{margin:-4px 0 12px;color:var(--ink2);font-size:.92rem}
+.jsub{margin:20px 0 8px;font-size:.95rem;color:var(--ink);padding-left:2px}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.jcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:6px;position:relative}
+.jcard:hover{border-color:var(--accent);box-shadow:var(--shadow2)}
+.jcard h4{margin:0;font-size:.98rem;line-height:1.5}
+.jcard h4 a{color:var(--ink);text-decoration:none}
+.jcard h4 a::after{content:"";position:absolute;inset:0;border-radius:var(--r)}
+.jcard h4 a:hover{color:var(--brand2);text-decoration:underline}
+.jcard p{margin:0;font-size:.84rem;color:var(--ink2);line-height:1.65}
+.jcard .badge{align-self:flex-start;white-space:normal}
+.jcard .alt{position:relative;z-index:2}
+.jcard[hidden],.jcat[hidden]{display:none}
+.ext{font-size:.8em;margin-left:2px;color:var(--ink3)}
+.ftype{display:inline-block;font-size:.66rem;font-weight:700;line-height:1.5;padding:0 6px;margin-left:4px;border-radius:5px;background:var(--surface2);color:var(--ink2);vertical-align:.1em}
+.src{font-size:.82rem;color:var(--ink3)}
+.jempty{padding:26px;text-align:center;color:var(--ink2);background:var(--surface);border:1px dashed var(--line2);border-radius:var(--r)}
+
+/* 詳細ページ */
+.jbody section.sec{margin:0}
+.jbody .h2{font-size:1.2rem;margin:34px 0 12px}
+.jbody h3{font-size:1.05rem;margin:22px 0 8px}
+.jbody h4{font-size:.98rem;margin:16px 0 6px;color:var(--ink2)}
+.jbody p,.jbody li{line-height:1.8}
+.jbody ul{padding-left:1.3em;margin:.4em 0 .9em}
+.jbody li{margin:.2em 0}
+.jbody p{margin:.5em 0 .9em}
+.keycards{display:grid;gap:14px;margin:0 0 8px}
+.kcard{background:var(--surface);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:var(--r);padding:14px 18px 8px;box-shadow:var(--shadow)}
+.kcard h2{margin:0 0 6px;font-size:1.02rem;color:var(--accent-ink)}
+.kcard.k-金額{border-left-color:var(--star)}
+.kcard.k-金額 h2{color:var(--soon)}
+.kcard.k-要件{border-left-color:var(--brand2)}
+.kcard.k-要件 h2{color:var(--brand2)}
+.kcard h3,.kcard h4{margin:12px 0 4px}
+.curated{background:var(--soon-bg);border:1px solid var(--line2);border-radius:var(--r);padding:14px 18px 10px;margin:0 0 16px}
+.curated h2{margin:0 0 8px;font-size:1.02rem}
+.curated table{background:var(--surface)}
+.toc{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:18px 0 0;padding:10px 12px;background:var(--surface2);border-radius:var(--r2);font-size:.84rem}
+.toc b{margin-right:6px;color:var(--ink2)}
+.toc a{border:1px solid var(--line2);background:var(--surface);border-radius:99px;padding:0 11px;text-decoration:none;color:var(--ink2)}
+.toc a:hover{border-color:var(--accent);color:var(--accent-ink)}
+.notice-sec{background:var(--soon-bg);border-radius:var(--r2);padding:2px 16px 4px;margin:14px 0}
+.notice-sec h2,.notice-sec h3{margin-top:12px!important}
+details.fold{border:1px solid var(--line);border-radius:var(--r2);background:var(--surface);margin:12px 0;padding:0 14px}
+details.fold>summary{cursor:pointer;padding:10px 0;font-weight:700;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:10px;color:var(--ink2)}
+details.fold>summary h2,details.fold>summary h3,details.fold>summary h4{margin:0!important;font-size:.98rem;color:var(--ink2);font-weight:700;border:0;padding:0}
+details.fold>summary::-webkit-details-marker{display:none}
+details.fold>summary::after{content:"＋ 開く";font-size:.78rem;font-weight:600;color:var(--brand2);flex:none}
+details.fold[open]>summary::after{content:"− 閉じる"}
+details.fold[open]{padding-bottom:10px}
+.tscroll{overflow-x:auto;margin:.6em 0 1em}
+.jbody table{border-collapse:collapse;width:100%;font-size:.88rem;min-width:420px}
+.jbody th,.jbody td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top;line-height:1.6}
+.jbody th{background:var(--surface2);font-weight:700}
+.clist{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.clist li{display:flex;flex-direction:column;font-weight:700;font-size:.92rem;line-height:1.5}
+.clist li span{font-weight:400;color:var(--ink2);font-size:.84rem}
+@media(max-width:640px){.needs{grid-template-columns:1fr}.jgrid{grid-template-columns:1fr}}
+.grid2>*{min-width:0}
+.jbody,.curated,.kcard{min-width:0;overflow-wrap:anywhere}
+.curated .tscroll,.kcard .tscroll{max-width:100%}
+.jbody table{table-layout:auto}

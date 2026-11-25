@@ -5,7 +5,8 @@
   "engines": { "node": ">=20" },
   "scripts": {
     "fetch": "node scripts/fetch.mjs",
+    "fetch:mhlw": "node scripts/fetch-mhlw.mjs",
     "build": "node scripts/build.mjs",
-    "update": "node scripts/fetch.mjs && node scripts/build.mjs"
+    "update": "node scripts/fetch.mjs && node scripts/fetch-mhlw.mjs --soft && node scripts/build.mjs"
   }
 }

@@ -28,7 +28,7 @@
     const p = el.querySelector(".pill");
     if (!p) return;
     if (dd < 0) { p.textContent = "受付終了"; p.className = "pill long"; return; }
-    if (dd > 400) return;
+    if (dd > 365) return;
     p.textContent = dd === 0 ? "締切は本日" : `あと${dd}日`;
     p.className = "pill" + (dd <= 7 ? " urgent" : dd <= 30 ? " soon" : "");
   });
