@@ -225,9 +225,10 @@ export async function loadJoseikin() {
     secN = 0;
     const tree = buildTree(p.blocks);
     const cur = curated.pages?.[p.slug];
-    const cards = KEY.map(([id, label, re]) => ({ id, label, node: take(tree, re) })).filter((c) => c.node);
+    // 2枚以上そろうときだけツリーから取り出す(1枚だけなら元の位置・順序のまま通常表示)
+    const found = KEY.filter(([, , re]) => { const w = (n) => n.kids.some((k) => (re.test(k.h) && (k.blocks.length || k.kids.length)) || w(k)); return w(tree); }).length;
+    const cards = found >= 2 ? KEY.map(([id, label, re]) => ({ id, label, node: take(tree, re) })).filter((c) => c.node) : [];
     const keyHtml = cards.length >= 2 ? `<div class="keycards">${cards.map((c) => `<section class="kcard k-${c.id}"><h2>${e(c.label)}</h2>${treeHtml({ ...c.node, kids: c.node.kids, blocks: c.node.blocks }, root, p)}</section>`).join("")}</div>` : "";
-    if (cards.length < 2) { for (const c of cards) { /* 1つだけ見つかった場合は通常表示に戻す */ tree.kids.unshift(c.node); } }
     const curatedHtml = cur ? `<section class="curated"><h2>${e(cur.title ?? "主な支給額・要件(公式リーフレットより)")}</h2>${(cur.html ?? "").replace(/<table>/g, '<div class="tscroll"><table>').replace(/<\/table>/g, "</table></div>")}<p class="src">出典: ${cur.sources.map((s) => `<a href="${e(s.url)}" rel="noopener" target="_blank">${e(s.label)}</a>`).join("、")}(${e(cur.checked)}確認)。${e(cur.note ?? "")}</p></section>` : "";
     const rest = treeHtml(tree, root, p);
     // 目次
@@ -274,10 +275,10 @@ ${isCourse && fraud ? `<a class="btn ghost" href="${href(root, fraud)}">不正�
     const others = hubGroups.filter((g) => !/雇用関係|労働条件等/.test(g.name));
     const othersHtml = `<section class="jcat" id="others" data-cat><h3 class="h2">事業主団体向け・労働者向けの制度</h3>${others.map((g) => `<h4 class="jsub">${e(g.name)}</h4>${g.note ? `<p class="jlead">${e(g.note)}</p>` : ""}<div class="jgrid">${g.items.map((i) => card(i.name, "", i.page, i.url, i.org)).join("")}</div>`).join("")}</section>`;
     const commonPages = COMMON_ORDER.map((s) => pages.find((p) => p.slug === s)).filter(Boolean);
-    const commonHtml = `<section class="jcat" id="common"><h3 class="h2">申請の前に確認したい共通情報</h3><div class="jgrid">${commonPages.map((p) => card(p.title.replace(/^雇用関係助成金/, "雇用関係助成金 ").replace(/\s+/g, " "), COMMON_LEAD[p.slug], p)).join("")}</div></section>`;
+    const commonHtml = `<section class="jcat" id="common" data-cat><h3 class="h2">申請の前に確認したい共通情報</h3><div class="jgrid">${commonPages.map((p) => card(p.title.replace(/^雇用関係助成金/, "雇用関係助成金 ").replace(/\s+/g, " "), COMMON_LEAD[p.slug], p)).join("")}</div></section>`;
     const body = `${head(root, [["joseikin/", "厚労省の助成金"]], "厚生労働省の助成金・奨励金 完全ガイド", `厚生労働省が実施する雇用関係助成金(${courseCount}コース)と労働条件等関係の助成金(${labourCount}制度)を、目的別にまとめました。各ページで概要・要件・受給額・申請先を確認できます。`)}
 <div class="main"><div class="wrap">
-<div class="warnbox" style="margin:0 0 20px"><b>助成金に関する勧誘にご注意ください。</b>厚生労働省の委託事業者を名乗り、助成金の申請や受給額の無料査定をうたって勧誘する者の情報が寄せられています。厚生労働省はこの勧誘に関与していません(厚生労働省の公式ページより)。申請窓口は<a href="${href(root, pages.find((p) => p.slug === "contact"))}">都道府県労働局・ハローワーク</a>です。</div>
+<div class="warnbox" style="margin:0 0 20px"><b>助成金に関する勧誘にご注意ください。</b>厚生労働省の委託事業者を名乗り、助成金の申請や受給額の無料査定をうたって勧誘する者の情報が寄せられています。厚生労働省はこの勧誘に関与していません(厚生労働省の公式ページより)。申請窓口は${pages.find((p) => p.slug === "contact") ? `<a href="${href(root, pages.find((p) => p.slug === "contact"))}">都道府県労働局・ハローワーク</a>` : "都道府県労働局・ハローワーク"}です。</div>
 <div class="box"><h2 class="jh">助成金と補助金は何が違う?</h2><p style="margin:0">厚生労働省の助成金は、<b>雇用や職場環境の改善などの要件を満たして申請すれば受給できる制度が中心</b>で、多くは通年で受け付けています(予算や公募期間が決まる補助金とは異なります)。ただし、要件を満たす取組を<b>事前に計画して届け出る</b>必要があるコースが多く、取組を始めた後では対象外になることがあります。詳しくは<a href="${root}guide/subsidy-vs-grant/">補助金と助成金の違い</a>と、共通の要件のページをご覧ください。</p></div>
 <h2 class="h2">こんなときは、この助成金</h2><div class="needs">${needs}</div>
 <h2 class="h2" id="all">制度の一覧</h2>
